@@ -2125,6 +2125,149 @@
             }
         }
 
+        /* Add this to completely eliminate horizontal scrolling */
+        html,
+        body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Force all sections and containers to stay within viewport */
+        .section,
+        .hero,
+        .stats,
+        .newsletter,
+        .footer,
+        .nav,
+        .hero-content {
+            max-width: 100vw;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Ensure all content containers don't exceed viewport */
+        .section-content,
+        .team-grid,
+        .classes-grid,
+        .membership-grid,
+        .contact-container,
+        .footer-content {
+            max-width: 100%;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Fix for interactive grid on mobile */
+        @media (max-width: 768px) {
+            .interactive-grid {
+                max-width: 100vw;
+                width: 100%;
+                margin: 0 auto;
+            }
+
+            .grid-item img {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+
+        /* Ensure all images don't cause overflow */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Center all content absolutely */
+        .section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .section-content,
+        .team-grid,
+        .classes-grid,
+        .membership-grid,
+        .contact-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Fix stats section on mobile */
+        @media (max-width: 768px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                padding: 0 1rem;
+                max-width: 100vw;
+                width: 100%;
+            }
+
+            .stat-item {
+                padding: 1rem;
+            }
+        }
+
+        /* Additional mobile fixes */
+        @media (max-width: 480px) {
+            .section {
+                padding: 4rem 1rem;
+            }
+
+            .hero-content {
+                padding: 0 1rem;
+            }
+
+            .nav {
+                padding: 0 1rem;
+            }
+
+            .mobile-menu {
+                width: 100%;
+                right: -100%;
+            }
+
+            .mobile-menu.active {
+                right: 0;
+            }
+        }
+
+        /* Force dead center alignment for all text content */
+        .section-title,
+        .section-number,
+        .content-text,
+        .member-info,
+        .class-info,
+        .membership-card,
+        .contact-text {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Ensure no element can cause horizontal scroll */
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Final safety measure */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
         /* Loading State for Buttons */
         .button-loading {
             position: relative;
