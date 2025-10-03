@@ -2738,6 +2738,17 @@
         themeToggle.addEventListener('click', toggleTheme);
         mobileThemeToggle.addEventListener('click', toggleTheme);
 
+        // Set dark theme as default on initial load
+        document.addEventListener('DOMContentLoaded', function () {
+            // Force dark theme on first load
+            if (!localStorage.getItem('theme')) {
+                body.classList.add('dark-theme');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                mobileThemeToggle.innerHTML = '<i class="fas fa-sun"></i> Toggle Theme';
+            }
+        });
+
         // Enhanced loading animation
         window.addEventListener('load', function () {
             const loader = document.querySelector('.loader');
