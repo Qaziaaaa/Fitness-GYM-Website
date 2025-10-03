@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Journey Fitness - Transform Your Body</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Roboto:wght@300;400;500;700&display=swap"
@@ -1076,55 +1077,15 @@
             margin-top: 3rem;
         }
 
-        .membership-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-top: 3rem;
-    justify-items: center; /* Center items in their grid cells */
-}
-
-/* Improved mobile responsiveness */
-@media (max-width: 1024px) {
-    .membership-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .membership-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        max-width: 400px; /* Limit max width on mobile */
-        margin-left: auto;
-        margin-right: auto;
-        padding: 0 1rem;
-    }
-    
-    .membership-card {
-        width: 100%;
-        max-width: 350px; /* Consistent card width */
-        margin: 0 auto; /* Center each card */
-    }
-    
-    .membership-card.featured {
-        transform: scale(1); /* Remove scale on mobile */
-        order: -1; /* Move featured card to top */
-    }
-}
-
-/* Extra small device fixes */
-@media (max-width: 480px) {
-    .membership-grid {
-        padding: 0 0.5rem;
-    }
-    
-    .membership-card {
-        padding: 1.5rem;
-        max-width: 100%; /* Use full width on very small screens */
-    }
-}
+        .membership-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
 
         body.dark-theme .membership-card {
             background: #1a1a1a;
@@ -2000,6 +1961,43 @@
             }
         }
 
+        /* Fix hero section for mobile devices */
+.hero {
+    min-height: 100vh;
+    padding-top: 80px; /* Add padding to prevent overlap */
+    height: auto; /* Change from fixed height to auto */
+}
+
+/* Ensure hero content is properly spaced */
+.hero-content {
+    padding-top: 2rem; /* Extra spacing from top */
+    padding-bottom: 2rem;
+}
+
+/* Mobile-specific fixes */
+@media (max-width: 768px) {
+    .hero {
+        padding-top: 100px; /* More padding on mobile */
+        min-height: calc(100vh - 60px); /* Account for navbar */
+    }
+    
+    .hero-title {
+        margin-top: 1rem; /* Extra spacing */
+    }
+    
+    .hero-content {
+        padding: 1rem;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .hero {
+        padding-top: 120px; /* Even more padding for very small screens */
+        min-height: calc(100vh - 80px);
+    }
+}
+
         /* Enhanced Button Click Effects */
         .hero-btn,
         .class-btn,
@@ -2229,45 +2227,6 @@
                 background-position: 200% 0;
             }
         }
-
-        /* Fix hero section for mobile devices */
-.hero {
-    min-height: 100vh;
-    padding-top: 80px; /* Add padding to prevent overlap */
-    height: auto; /* Change from fixed height to auto */
-}
-
-/* Ensure hero content is properly spaced */
-.hero-content {
-    padding-top: 2rem; /* Extra spacing from top */
-    padding-bottom: 2rem;
-}
-
-/* Mobile-specific fixes */
-@media (max-width: 768px) {
-    .hero {
-        padding-top: 100px; /* More padding on mobile */
-        min-height: calc(100vh - 60px); /* Account for navbar */
-    }
-    
-    .hero-title {
-        margin-top: 1rem; /* Extra spacing */
-    }
-    
-    .hero-content {
-        padding: 1rem;
-    }
-}
-
-/* Extra small devices */
-@media (max-width: 480px) {
-    .hero {
-        padding-top: 120px; /* Even more padding for very small screens */
-        min-height: calc(100vh - 80px);
-    }
-}
-
-
 
         /* 3D Press Effect */
         .press-3d:active {
