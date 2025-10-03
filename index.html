@@ -1,0 +1,3240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journey Fitness - Transform Your Body</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        /* Previous CSS remains the same until we add the new button effects */
+
+        /* Ripple Effect for Buttons */
+        .ripple-btn {
+            position: relative;
+            overflow: hidden;
+            transform: translate3d(0, 0, 0);
+        }
+
+        .ripple-btn:after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+            background-repeat: no-repeat;
+            background-position: 50%;
+            transform: scale(10, 10);
+            opacity: 0;
+            transition: transform .5s, opacity 1s;
+        }
+
+        .ripple-btn:active:after {
+            transform: scale(0, 0);
+            opacity: .2;
+            transition: 0s;
+        }
+
+        /* Enhanced button hover effects */
+        .hero-btn,
+        .class-btn,
+        .cta-btn,
+        .submit-btn,
+        .newsletter-btn {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+        }
+
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #ff6b35;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        body.dark-theme .scroll-to-top {
+            background: #ffff00;
+            color: #000;
+            box-shadow: 0 5px 15px rgba(255, 255, 0, 0.3);
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .scroll-to-top:hover {
+            background: #e55a2b;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        body.dark-theme .scroll-to-top:hover {
+            background: #e6e600;
+            box-shadow: 0 8px 20px rgba(255, 255, 0, 0.4);
+        }
+
+        .scroll-to-top:active {
+            transform: translateY(-1px);
+        }
+
+        /* Ensure no horizontal scrolling */
+        html,
+        body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Rest of the CSS remains exactly the same */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.5s ease, color 0.5s ease;
+            user-select: none;
+            /* Prevents text selection */
+            -webkit-user-select: none;
+            /* For Safari */
+            -ms-user-select: none;
+            /* For old IE */
+        }
+
+        body.dark-theme {
+            background-color: #0a0a0a;
+            color: #ffffff;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(248, 249, 250, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-theme .header {
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-theme .header.scrolled {
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Logo Styles */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #ff6b35;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            font-style: italic;
+        }
+
+        body.dark-theme .logo-text {
+            color: #ffff00;
+        }
+
+        /* Logo animation on hover */
+        .logo:hover .logo-text {
+            animation: logoGlow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoGlow {
+            from {
+                text-shadow: 0 0 5px rgba(255, 107, 53, 0.5);
+            }
+
+            to {
+                text-shadow: 0 0 15px rgba(255, 107, 53, 0.8), 0 0 20px rgba(255, 107, 53, 0.6);
+            }
+        }
+
+        body.dark-theme .logo:hover .logo-text {
+            animation: logoGlowDark 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoGlowDark {
+            from {
+                text-shadow: 0 0 5px rgba(255, 255, 0, 0.5);
+            }
+
+            to {
+                text-shadow: 0 0 15px rgba(255, 255, 0, 0.8), 0 0 20px rgba(255, 255, 0, 0.6);
+            }
+        }
+
+        /* Footer logo styling */
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff6b35;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            font-style: italic;
+        }
+
+        body.dark-theme .footer-logo {
+            color: #ffff00;
+        }
+
+        /* Desktop Navigation */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 5px 0;
+        }
+
+        body.dark-theme .nav-links a {
+            color: #ffffff;
+        }
+
+        /* Nav Link Hover Effect */
+        .nav-links a:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #ff6b35;
+            visibility: hidden;
+            transform: scaleX(0);
+            transition: all 0.3s ease-in-out;
+        }
+
+        body.dark-theme .nav-links a:before {
+            background-color: #ffff00;
+        }
+
+        .nav-links a:hover:before {
+            visibility: visible;
+            transform: scaleX(1);
+        }
+
+        .nav-links a:hover {
+            color: #ff6b35;
+        }
+
+        body.dark-theme .nav-links a:hover {
+            color: #ffff00;
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: #ff6b35;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-theme .theme-toggle {
+            background: #ffff00;
+            color: #000;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(45deg);
+        }
+
+        .cta-btn {
+            background: #ff6b35;
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+        }
+
+        body.dark-theme .cta-btn {
+            background: #ffff00;
+            color: #000;
+        }
+
+        .cta-btn:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        body.dark-theme .cta-btn:hover {
+            background: #e6e600;
+            box-shadow: 0 5px 15px rgba(255, 255, 0, 0.3);
+        }
+
+        /* Hamburger Menu Styles */
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            width: 30px;
+            height: 24px;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .hamburger-menu span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #ff6b35;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+            position: absolute;
+            left: 0;
+        }
+
+        body.dark-theme .hamburger-menu span {
+            background-color: #ffff00;
+        }
+
+        .hamburger-menu span:nth-child(1) {
+            top: 0;
+        }
+
+        .hamburger-menu span:nth-child(2) {
+            top: 10px;
+        }
+
+        .hamburger-menu span:nth-child(3) {
+            top: 20px;
+        }
+
+        /* Hamburger Menu Active State */
+        .hamburger-menu.active span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 10px;
+        }
+
+        .hamburger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: 10px;
+        }
+
+        /* Mobile Menu Styles */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: #f8f9fa;
+            z-index: 1000;
+            transition: right 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+            padding: 80px 2rem 2rem;
+            display: flex;
+            flex-direction: column;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        body.dark-theme .mobile-menu {
+            background: #0a0a0a;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            display: block;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-theme .mobile-nav-links a {
+            color: #ffffff;
+        }
+
+        .mobile-nav-links a:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        body.dark-theme .mobile-nav-links a:before {
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 0, 0.2), transparent);
+        }
+
+        .mobile-nav-links a:hover:before {
+            left: 100%;
+        }
+
+        .mobile-nav-links a:hover {
+            background-color: rgba(255, 107, 53, 0.1);
+            transform: translateX(5px);
+        }
+
+        body.dark-theme .mobile-nav-links a:hover {
+            background-color: rgba(255, 255, 0, 0.1);
+        }
+
+        .mobile-nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .mobile-theme-toggle {
+            background: #ff6b35;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        body.dark-theme .mobile-theme-toggle {
+            background: #ffff00;
+            color: #000;
+        }
+
+        .mobile-theme-toggle:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+        }
+
+        body.dark-theme .mobile-theme-toggle:hover {
+            background: #e6e600;
+        }
+
+        .mobile-cta-btn {
+            background: #ff6b35;
+            color: #fff;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        body.dark-theme .mobile-cta-btn {
+            background: #ffff00;
+            color: #000;
+        }
+
+        .mobile-cta-btn:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        body.dark-theme .mobile-cta-btn:hover {
+            background: #e6e600;
+            box-shadow: 0 5px 15px rgba(255, 255, 0, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(248, 249, 250, 0.7), rgba(248, 249, 250, 0.7)), url('./equipments.jpeg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-theme .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&h=1080&q=80');
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 107, 53, 0.1), rgba(255, 107, 53, 0));
+            z-index: 1;
+        }
+
+        body.dark-theme .hero:before {
+            background: linear-gradient(45deg, rgba(255, 255, 0, 0.1), rgba(255, 255, 0, 0));
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            padding: 0 2rem;
+            z-index: 2;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 4.5vw, 3.5rem);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-title .line {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .hero-title .highlight {
+            color: #ff6b35;
+            display: inline-block;
+            margin: 0 0.3rem;
+        }
+
+        body.dark-theme .hero-title .highlight {
+            color: #ffff00;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.8;
+            max-width: 600px;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 1.2s;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        body.dark-theme .hero-subtitle {
+            opacity: 0.9;
+        }
+
+        .hero-btn {
+            background: #ff6b35;
+            color: #fff;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+        }
+
+        body.dark-theme .hero-btn {
+            background: #ffff00;
+            color: #000;
+        }
+
+        .hero-btn:hover {
+            background: #e55a2b;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        body.dark-theme .hero-btn:hover {
+            background: #e6e600;
+            box-shadow: 0 10px 30px rgba(255, 255, 0, 0.3);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-number {
+            font-size: 8rem;
+            font-weight: 900;
+            color: rgba(0, 0, 0, 0.05);
+            line-height: 1;
+            margin-bottom: -4rem;
+            position: relative;
+            z-index: 0;
+            font-family: 'Orbitron', sans-serif;
+            -webkit-text-stroke: 2px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-theme .section-number {
+            color: rgba(255, 255, 255, 0.1);
+            -webkit-text-stroke: 2px rgba(255, 255, 255, 0.3);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .section-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .content-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        /* Unique Who We Are Section - Interactive Image Grid */
+        .interactive-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 10px;
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-theme .interactive-grid {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .grid-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .grid-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .grid-item .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 107, 53, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        body.dark-theme .grid-item .overlay {
+            background: rgba(255, 255, 0, 0.8);
+            color: #000;
+        }
+
+        .grid-item:hover .overlay {
+            opacity: 1;
+        }
+
+        .grid-item:nth-child(1) {
+            grid-column: 1 / 2;
+            grid-row: 1 / 3;
+        }
+
+        .grid-item:nth-child(2) {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+        }
+
+        .grid-item:nth-child(3) {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+        }
+
+        /* Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        body.dark-theme .team-member {
+            background: #1a1a1a;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-theme .team-member:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .member-image {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .member-image img {
+            width: 100%;
+            height: 130%;
+            object-fit: cover;
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+
+        .team-member:hover .member-image img {
+            transform: scale(1.1);
+            filter: grayscale(100%) brightness(0.7);
+        }
+
+        .member-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .member-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .member-role {
+            color: #ff6b35;
+            font-size: 0.9rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+        }
+
+        body.dark-theme .member-role {
+            color: #ffff00;
+        }
+
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .class-card {
+            background: linear-gradient(45deg, #fff, #f8f9fa);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        body.dark-theme .class-card {
+            background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .class-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-theme .class-card:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .class-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .class-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+
+        .class-card:hover .class-image img {
+            transform: scale(1.1);
+            filter: brightness(1.1) saturate(1.2);
+        }
+
+        .class-image:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 107, 53, 0.3), rgba(255, 107, 53, 0.1));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 1;
+        }
+
+        body.dark-theme .class-image:after {
+            background: linear-gradient(45deg, rgba(255, 255, 0, 0.3), rgba(255, 255, 0, 0.1));
+        }
+
+        .class-card:hover .class-image:after {
+            opacity: 1;
+        }
+
+        .class-info {
+            padding: 1.5rem;
+        }
+
+        .class-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .class-btn {
+            background: #ff6b35;
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+        }
+
+        body.dark-theme .class-btn {
+            background: #ffff00;
+            color: #000;
+        }
+
+        .class-btn:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        body.dark-theme .class-btn:hover {
+            background: #e6e600;
+            box-shadow: 0 5px 15px rgba(255, 255, 0, 0.3);
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin: 4rem auto;
+            text-align: center;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+
+        .stat-item {
+            padding: 2rem;
+            background: #fff;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        body.dark-theme .stat-item {
+            background: #1a1a1a;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #ff6b35;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        body.dark-theme .stat-number {
+            color: #ffff00;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+        }
+
+        /* Memberships */
+        .membership-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .membership-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        body.dark-theme .membership-card {
+            background: #1a1a1a;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .membership-card:hover {
+            border-color: #ff6b35;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-theme .membership-card:hover {
+            border-color: #ffff00;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .membership-card.featured {
+            background: #ff6b35;
+            color: white;
+            border-color: #ff6b35;
+            transform: scale(1.05);
+        }
+
+        body.dark-theme .membership-card.featured {
+            background: #ffff00;
+            color: #000;
+            border-color: #ffff00;
+        }
+
+        .membership-card.featured:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .membership-card.featured .membership-price {
+            color: white;
+        }
+
+        body.dark-theme .membership-card.featured .membership-price {
+            color: #000;
+        }
+
+        .membership-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .membership-price {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #ff6b35;
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        body.dark-theme .membership-price {
+            color: #ffff00;
+        }
+
+        .membership-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .membership-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        body.dark-theme .membership-features li {
+            border-bottom: 1px solid #333;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: #ff6b35;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.5rem;
+        }
+
+        body.dark-theme .contact-icon {
+            background: #ffff00;
+            color: #000;
+        }
+
+        .contact-text h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #ff6b35;
+        }
+
+        body.dark-theme .contact-text h3 {
+            color: #ffff00;
+        }
+
+        .contact-form {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        body.dark-theme .contact-form {
+            background: #1a1a1a;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            color: #333;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-theme .form-control {
+            background: #2a2a2a;
+            border: 1px solid #333;
+            color: #fff;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.2);
+        }
+
+        body.dark-theme .form-control:focus {
+            border-color: #ffff00;
+            box-shadow: 0 0 0 2px rgba(255, 255, 0, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: #ff6b35;
+            color: #fff;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            width: 100%;
+        }
+
+        body.dark-theme .submit-btn {
+            background: #ffff00;
+            color: #000;
+        }
+
+        .submit-btn:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        body.dark-theme .submit-btn:hover {
+            background: #e6e600;
+            box-shadow: 0 5px 15px rgba(255, 255, 0, 0.3);
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background: #ff6b35;
+            color: #fff;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        body.dark-theme .newsletter {
+            background: #ffff00;
+            color: #000;
+        }
+
+        .newsletter-title {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 400px;
+            margin: 0 auto;
+            gap: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .newsletter-btn {
+            background: #000;
+            color: #ff6b35;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+        }
+
+        body.dark-theme .newsletter-btn {
+            background: #000;
+            color: #ffff00;
+        }
+
+        .newsletter-btn:hover {
+            background: #333;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: #f8f9fa;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid #ddd;
+        }
+
+        body.dark-theme .footer {
+            background: #0a0a0a;
+            border-top: 1px solid #333;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff6b35;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        body.dark-theme .footer-logo {
+            color: #ffff00;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-theme .footer-links a {
+            color: #ffffff;
+        }
+
+        .footer-links a:hover {
+            color: #ff6b35;
+        }
+
+        body.dark-theme .footer-links a:hover {
+            color: #ffff00;
+        }
+
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #ddd;
+            text-align: center;
+        }
+
+        body.dark-theme .footer-bottom {
+            border-top: 1px solid #333;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+                padding: 0 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger-menu {
+                display: flex;
+            }
+
+            .nav-links,
+            .nav-buttons {
+                display: none;
+            }
+
+            .section-content {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                gap: 1.2rem;
+                padding: 0 1.2rem;
+                margin: 3rem auto;
+            }
+
+            .stat-item {
+                padding: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 3rem;
+            }
+
+            .membership-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .membership-card.featured {
+                transform: scale(1);
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-title .line {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .interactive-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(3, 1fr);
+                height: 600px;
+            }
+
+            .grid-item:nth-child(1) {
+                grid-column: 1 / 2;
+                grid-row: 1 / 2;
+            }
+
+            .grid-item:nth-child(2) {
+                grid-column: 1 / 2;
+                grid-row: 2 / 3;
+            }
+
+            .grid-item:nth-child(3) {
+                grid-column: 1 / 2;
+                grid-row: 3 / 4;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats {
+                gap: 1.2rem;
+                padding: 0 1.2rem;
+                margin: 3rem auto;
+            }
+
+            .stat-item {
+                padding: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 3rem;
+            }
+
+            @media (max-width: 768px) {
+
+                /* Add this for section titles on mobile */
+                .section-title {
+                    font-size: 2rem;
+                    line-height: 1.2;
+                    word-wrap: break-word;
+                    padding: 0 1rem;
+                    text-align: center;
+                }
+
+                /* Adjust section number for mobile */
+                .section-number {
+                    font-size: 6rem;
+                    margin-bottom: -3rem;
+                }
+
+                /* Ensure proper spacing for membership section */
+                #memberships .section {
+                    padding: 4rem 1rem;
+                }
+            }
+        }
+
+        @media (max-width: 600px) {
+            .stats {
+                gap: 1rem;
+                padding: 0 1rem;
+                margin: 2.5rem auto;
+            }
+
+            .stat-item {
+                padding: 1.2rem;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .stat-label {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+                padding: 0 0.8rem;
+            }
+
+            .stat-item {
+                padding: 1rem 0.5rem;
+            }
+
+            .stat-number {
+                font-size: 2.2rem;
+            }
+
+            .stat-label {
+                font-size: 0.85rem;
+                line-height: 1.3;
+            }
+        }
+
+        /* Animations */
+        @keyframes heroFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Cursor Styles */
+        * {
+            cursor: none !important;
+        }
+
+        .custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.15s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+        }
+
+        .cursor-inner {
+            width: 8px;
+            height: 8px;
+            background-color: #ff6b35;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+        }
+
+        body.dark-theme .cursor-inner {
+            background-color: #ffff00;
+        }
+
+        .cursor-outer {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #ff6b35;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+            opacity: 0.7;
+        }
+
+        body.dark-theme .cursor-outer {
+            border-color: #ffff00;
+        }
+
+        /* Pointer State (filled circle) */
+        .cursor-pointer .cursor-inner {
+            width: 40px;
+            height: 40px;
+            background-color: #ff6b35;
+            opacity: 0.9;
+        }
+
+        .cursor-pointer .cursor-outer {
+            opacity: 0;
+        }
+
+        body.dark-theme .cursor-pointer .cursor-inner {
+            background-color: #ffff00;
+        }
+
+        /* Hover states */
+        .cursor-hover .cursor-inner {
+            transform: translate(-50%, -50%) scale(1.3);
+        }
+
+        .cursor-hover .cursor-outer {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* Click animation */
+        .cursor-click .cursor-inner {
+            transform: translate(-50%, -50%) scale(0.8);
+        }
+
+        /* Hide custom cursor on touch devices */
+        @media (hover: none) and (pointer: coarse) {
+            .custom-cursor {
+                display: none;
+            }
+
+            * {
+                cursor: auto !important;
+            }
+        }
+
+        /* Enhanced Loader Styles */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        body.dark-theme .loader {
+            background: #0a0a0a;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loader-content {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        /* Animated Journey Text */
+        .loader-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            background: linear-gradient(45deg, #ff6b35, #ff8e53, #ff6b35);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 2s ease infinite, fadeIn 1s ease;
+        }
+
+        body.dark-theme .loader-text {
+            background: linear-gradient(45deg, #ffff00, #ff9900, #ffff00);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        /* Fitness-inspired Loading Animation */
+        .loader-animation {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .barbell {
+            width: 120px;
+            height: 8px;
+            background: linear-gradient(90deg, #333, #666, #333);
+            border-radius: 4px;
+            position: relative;
+            animation: barbellLift 2s ease-in-out infinite;
+        }
+
+        body.dark-theme .barbell {
+            background: linear-gradient(90deg, #ffff00, #ff9900, #ffff00);
+        }
+
+        .barbell::before,
+        .barbell::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff6b35;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        body.dark-theme .barbell::before,
+        body.dark-theme .barbell::after {
+            background: #ffff00;
+        }
+
+        .barbell::before {
+            left: -10px;
+        }
+
+        .barbell::after {
+            right: -10px;
+        }
+
+        /* Progress Bar */
+        .loader-progress {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 107, 53, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body.dark-theme .loader-progress {
+            background: rgba(255, 255, 0, 0.2);
+        }
+
+        .loader-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b35, #ff8e53);
+            border-radius: 2px;
+            width: 0%;
+            animation: loadingProgress 2s ease-in-out;
+        }
+
+        body.dark-theme .loader-progress-bar {
+            background: linear-gradient(90deg, #ffff00, #ff9900);
+        }
+
+        /* Loading Dots */
+        .loading-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .loading-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ff6b35;
+            animation: dotPulse 1.4s ease-in-out infinite both;
+        }
+
+        body.dark-theme .loading-dot {
+            background: #ffff00;
+        }
+
+        .loading-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loading-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        /* Animations */
+        @keyframes barbellLift {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            25% {
+                transform: translateY(-20px) rotate(-5deg);
+            }
+
+            50% {
+                transform: translateY(-10px) rotate(5deg);
+            }
+
+            75% {
+                transform: translateY(-15px) rotate(-3deg);
+            }
+        }
+
+        @keyframes loadingProgress {
+            0% {
+                width: 0%;
+            }
+
+            50% {
+                width: 70%;
+            }
+
+            100% {
+                width: 100%;
+            }
+        }
+
+        @keyframes gradientShift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes dotPulse {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+
+            40% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Enhanced Button Click Effects */
+        .hero-btn,
+        .class-btn,
+        .cta-btn,
+        .submit-btn,
+        .newsletter-btn,
+        .mobile-cta-btn,
+        .mobile-theme-toggle,
+        .theme-toggle,
+        .join-btn,
+        .book-btn {
+            position: relative;
+            overflow: hidden;
+            transform: translate3d(0, 0, 0);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Pulse Effect on Click */
+        .hero-btn:active,
+        .class-btn:active,
+        .cta-btn:active,
+        .submit-btn:active,
+        .newsletter-btn:active,
+        .mobile-cta-btn:active,
+        .mobile-theme-toggle:active,
+        .theme-toggle:active,
+        .join-btn:active,
+        .book-btn:active {
+            animation: buttonPulse 0.4s ease-out;
+        }
+
+        @keyframes buttonPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(255, 107, 53, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 107, 53, 0);
+            }
+        }
+
+        body.dark-theme .hero-btn:active,
+        body.dark-theme .class-btn:active,
+        body.dark-theme .cta-btn:active,
+        body.dark-theme .submit-btn:active,
+        body.dark-theme .newsletter-btn:active,
+        body.dark-theme .mobile-cta-btn:active,
+        body.dark-theme .mobile-theme-toggle:active,
+        body.dark-theme .theme-toggle:active,
+        body.dark-theme .join-btn:active,
+        body.dark-theme .book-btn:active {
+            animation: buttonPulseDark 0.4s ease-out;
+        }
+
+        @keyframes buttonPulseDark {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 0, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(255, 255, 0, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 0, 0);
+            }
+        }
+
+        /* Scale Down Effect */
+        .hero-btn:active,
+        .class-btn:active,
+        .cta-btn:active,
+        .submit-btn:active,
+        .newsletter-btn:active,
+        .mobile-cta-btn:active,
+        .mobile-theme-toggle:active,
+        .theme-toggle:active,
+        .join-btn:active,
+        .book-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Enhanced Ripple Effect */
+        .ripple-btn {
+            position: relative;
+            overflow: hidden;
+            transform: translate3d(0, 0, 0);
+        }
+
+        .ripple-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .ripple-btn:active::before {
+            width: 300px;
+            height: 300px;
+            opacity: 0;
+            transition: width 0.6s ease, height 0.6s ease, opacity 0.6s ease;
+        }
+
+        /* Dark theme ripple */
+        body.dark-theme .ripple-btn::before {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        /* Glow Effect on Click */
+        .hero-btn:active,
+        .class-btn:active,
+        .cta-btn:active,
+        .submit-btn:active,
+        .newsletter-btn:active {
+            filter: brightness(1.2) saturate(1.3);
+        }
+
+        /* Bounce Effect for Specific Buttons */
+        .theme-toggle:active,
+        .mobile-theme-toggle:active {
+            animation: themeBounce 0.3s ease;
+        }
+
+        @keyframes themeBounce {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+
+            50% {
+                transform: scale(0.9) rotate(180deg);
+            }
+        }
+
+        /* Success Feedback for Form Buttons */
+        .submit-btn.click-success {
+            background: #4CAF50 !important;
+            animation: successGlow 1s ease;
+        }
+
+        @keyframes successGlow {
+            0% {
+                box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+            }
+
+            50% {
+                box-shadow: 0 0 20px 10px rgba(76, 175, 80, 0.3);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+            }
+        }
+
+        /* Loading State for Buttons */
+        .button-loading {
+            position: relative;
+            color: transparent !important;
+        }
+
+        .button-loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: buttonSpin 1s linear infinite;
+        }
+
+        body.dark-theme .button-loading::after {
+            border: 2px solid rgba(0, 0, 0, 0.3);
+            border-top: 2px solid black;
+        }
+
+        @keyframes buttonSpin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Magnetic Button Effect */
+        .magnetic-btn {
+            position: relative;
+            transition: transform 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        .magnetic-btn:hover {
+            transform: translate(var(--tx, 0), var(--ty, 0)) scale(1.05);
+        }
+
+        /* Shimmer Effect on Click */
+        .shimmer-btn:active {
+            background-image: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.4),
+                    transparent);
+            background-size: 200% 100%;
+            animation: shimmer 0.6s ease;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        /* 3D Press Effect */
+        .press-3d:active {
+            transform: translateY(4px) scale(0.98);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Confetti Effect Container */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10000;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff6b35;
+            opacity: 0;
+            animation: confettiFall 1s ease-out forwards;
+        }
+
+        body.dark-theme .confetti {
+            background: #ffff00;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Enhanced Fitness Loader -->
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-text">JOURNEY FITNESS</div>
+
+            <div class="loader-animation">
+                <div class="barbell"></div>
+            </div>
+
+            <div class="loader-progress">
+                <div class="loader-progress-bar"></div>
+            </div>
+
+            <div class="loading-dots">
+                <div class="loading-dot"></div>
+                <div class="loading-dot"></div>
+                <div class="loading-dot"></div>
+            </div>
+
+            <p style="font-family: 'Orbitron', sans-serif; font-size: 0.9rem; letter-spacing: 1px;">
+                PREPARING YOUR FITNESS JOURNEY
+            </p>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-nav-links">
+            <li><a href="#home" class="mobile-nav-link">Home</a></li>
+            <li><a href="#about" class="mobile-nav-link">Who We Are</a></li>
+            <li><a href="#team" class="mobile-nav-link">Meet The Team</a></li>
+            <li><a href="#classes" class="mobile-nav-link">Classes</a></li>
+            <li><a href="#memberships" class="mobile-nav-link">Memberships</a></li>
+        </ul>
+        <div class="mobile-nav-buttons">
+            <button class="mobile-theme-toggle ripple-btn" id="mobileThemeToggle">
+                <i class="fas fa-moon"></i> Toggle Theme
+            </button>
+            <button class="mobile-cta-btn ripple-btn" id="mobileContactBtn">Contact</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">
+                <span class="logo-text">JOURNEY</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">Who We Are</a></li>
+                <li><a href="#team">Meet The Team</a></li>
+                <li><a href="#classes">Classes</a></li>
+                <li><a href="#memberships">Memberships</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="theme-toggle ripple-btn" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="cta-btn ripple-btn" id="contactBtn">Contact</button>
+            </div>
+            <!-- Hamburger Menu -->
+            <div class="hamburger-menu" id="hamburgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <div class="line">
+                    <span>The Only</span>
+                    <span class="highlight">&nbsp;Impossible</span>
+                    <span>Journey Is</span><span>&nbsp;The One </span>
+                </div>
+                <div class="line">
+                    <span>You</span>
+                    <span class="highlight">&nbsp;Never Begin.</span>
+                </div>
+            </h1>
+            <p class="hero-subtitle">Transform your body and mind with our world-class training programs. Join thousands
+                who have already started their journey.</p>
+            <button class="hero-btn ripple-btn" id="heroBtn">Start Your Journey</button>
+        </div>
+    </section>
+
+    <!-- Who We Are -->
+    <section class="section" id="about">
+        <div class="section-number">01</div>
+        <h2 class="section-title">Who We Are</h2>
+        <div class="section-content">
+            <div class="content-text">
+                <p>At Journey London we believe Champions come in all shapes and sizes, we are an all-inclusive gym
+                    catering for your own individual health and Fitness needs. A diverse team makes us better as a
+                    collective.</p>
+                <br>
+                <p>Our facility is unlike any other gym you've seen in London. We have equipped and built one of the
+                    biggest and most advanced facilities. We are continually dedicated to your health, fitness and
+                    wellbeing of a lifetime.</p>
+            </div>
+            <div class="interactive-grid">
+                <div class="grid-item">
+                    <img src="./equipments.jpeg" alt="State-of-the-art equipment">
+                    <div class="overlay">Advanced Equipment</div>
+                </div>
+                <div class="grid-item">
+                    <img src="./expert-trainer.jpg" alt="Training">
+                    <div class="overlay">Expert Training</div>
+                </div>
+                <div class="grid-item">
+                    <img src="./community.jpg" alt="Community">
+                    <div class="overlay">Supportive Community</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meet The Team -->
+    <section class="section" id="team">
+        <div class="section-number">02</div>
+        <h2 class="section-title">Meet The Team</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="./t1.png" alt="Sarah Johnson">
+                </div>
+                <div class="member-info">
+                    <div class="member-name">Sarah Johnson</div>
+                    <div class="member-role">Head Trainer</div>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="./t2.png" alt="Mike Chen">
+                </div>
+                <div class="member-info">
+                    <div class="member-name">Mike Chen</div>
+                    <div class="member-role">CrossFit Coach</div>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="./t3.png" alt="Emma Davis">
+                </div>
+                <div class="member-info">
+                    <div class="member-name">Emma Davis</div>
+                    <div class="member-role">Yoga Instructor</div>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="./t4.png" alt="Alex Rodriguez">
+                </div>
+                <div class="member-info">
+                    <div class="member-name">Alex Rodriguez</div>
+                    <div class="member-role">Strength Coach</div>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="./t5.png" alt="Lisa Thompson">
+                </div>
+                <div class="member-info">
+                    <div class="member-name">Lisa Thompson</div>
+                    <div class="member-role">Nutrition Expert</div>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="./t6.png" alt="James Wilson">
+                </div>
+                <div class="member-info">
+                    <div class="member-name">James Wilson</div>
+                    <div class="member-role">Olympic Lifting</div>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="./t7.png" alt="Ryan Carter">
+                </div>
+                <div class="member-info">
+                    <div class="member-name">Ryan Carter</div>
+                    <div class="member-role">Cardio Specialist</div>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="./t8.png" alt="Sophia Lee">
+                </div>
+                <div class="member-info">
+                    <div class="member-name">Sophia Lee</div>
+                    <div class="member-role">Pilates Instructor</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Classes -->
+    <section class="section" id="classes">
+        <div class="section-number">03</div>
+        <h2 class="section-title">Featured Classes</h2>
+        <div class="classes-grid">
+            <div class="class-card">
+                <div class="class-image">
+                    <img src="./crossfit-beginner.jpeg" alt="CrossFit Training">
+                </div>
+                <div class="class-info">
+                    <h3 class="class-title">CrossFit - Beginners Class</h3>
+                    <button class="class-btn ripple-btn book-btn">Book</button>
+                </div>
+            </div>
+            <div class="class-card">
+                <div class="class-image">
+                    <img src="./crossfit-Gymnastics.webp" alt="Gymnastics">
+                </div>
+                <div class="class-info">
+                    <h3 class="class-title">CrossFit - Gymnastics</h3>
+                    <button class="class-btn ripple-btn book-btn">Book</button>
+                </div>
+            </div>
+            <div class="class-card">
+                <div class="class-image">
+                    <img src="./olympic-lifting.jpg" alt="Olympic Lifting">
+                </div>
+                <div class="class-info">
+                    <h3 class="class-title">CrossFit - Olympic Lifting</h3>
+                    <button class="class-btn ripple-btn book-btn">Book</button>
+                </div>
+            </div>
+            <div class="class-card">
+                <div class="class-image">
+                    <img src="./crossfit-female.jpg" alt="Female Only">
+                </div>
+                <div class="class-info">
+                    <h3 class="class-title">CrossFit - Female Only</h3>
+                    <button class="class-btn ripple-btn book-btn">Book</button>
+                </div>
+            </div>
+            <div class="class-card">
+                <div class="class-image">
+                    <img src="./HIIT.webp" alt="HIIT Training">
+                </div>
+                <div class="class-info">
+                    <h3 class="class-title">HIIT - High Intensity</h3>
+                    <button class="class-btn ripple-btn book-btn">Book</button>
+                </div>
+            </div>
+            <div class="class-card">
+                <div class="class-image">
+                    <img src="./yoga.jpeg" alt="Yoga">
+                </div>
+                <div class="class-info">
+                    <h3 class="class-title">Yoga - Flow & Restore</h3>
+                    <button class="class-btn ripple-btn book-btn">Book</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stat-item">
+            <div class="stat-number" data-target="45">0</div>
+            <div class="stat-label">Different<br>Modules</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" data-target="60">0</div>
+            <div class="stat-label">Minutes<br>Per Class</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" data-target="20">0</div>
+            <div class="stat-label">Classes<br>Per Week</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" data-target="1">0</div>
+            <div class="stat-label">United<br>Goal</div>
+        </div>
+    </section>
+
+    <!-- Memberships -->
+    <section class="section" id="memberships">
+        <div class="section-number">04</div>
+        <h2 class="section-title">Memberships</h2>
+        <div class="membership-grid">
+            <div class="membership-card">
+                <h3 class="membership-title">Flexi</h3>
+                <div class="membership-price">£99.99<span style="font-size: 1rem;">/month</span></div>
+                <ul class="membership-features">
+                    <li>Gym Access</li>
+                    <li>2 Classes Per Week</li>
+                    <li>No Joining Fees</li>
+                </ul>
+                <button class="class-btn ripple-btn join-btn">Join Today</button>
+            </div>
+            <div class="membership-card featured">
+                <h3 class="membership-title">All Access</h3>
+                <div class="membership-price">£139.99<span style="font-size: 1rem;">/month</span></div>
+                <ul class="membership-features">
+                    <li>Unlimited Gym Access</li>
+                    <li>5 Classes Per Day</li>
+                    <li>No Joining Fees</li>
+                    <li>Premium Support</li>
+                </ul>
+                <button class="class-btn ripple-btn join-btn">Join Today</button>
+            </div>
+            <div class="membership-card">
+                <h3 class="membership-title">Off-Peak</h3>
+                <div class="membership-price">£149.99<span style="font-size: 1rem;">/month</span></div>
+                <ul class="membership-features">
+                    <li>Off-Peak Hours</li>
+                    <li>3 Classes Per Week</li>
+                    <li>No Joining Fees</li>
+                </ul>
+                <button class="class-btn ripple-btn join-btn">Join Today</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact-section" id="contact">
+        <div class="section-number">05</div>
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Our Location</h3>
+                        <p>123 Fitness Street, London, UK</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Phone Number</h3>
+                        <p>+44 123 456 7890</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Email Address</h3>
+                        <p>info@journeyfitness.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Opening Hours</h3>
+                        <p>Monday - Friday: 5:00 AM - 11:00 PM<br>
+                            Saturday - Sunday: 6:00 AM - 10:00 PM</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn ripple-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <h2 class="newsletter-title">Subscribe to Our Newsletter</h2>
+        <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="Enter your email">
+            <button type="submit" class="newsletter-btn ripple-btn">Submit</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <div class="footer-logo">Journey</div>
+                <p>Transform your body and mind with our world-class training programs.</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#team">Our Team</a></li>
+                    <li><a href="#classes">Classes</a></li>
+                    <li><a href="#memberships">Memberships</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Contact Us</h3>
+                <p>123 Fitness Street<br>London, UK<br>Phone: +44 123 456 7890<br>Email: info@journeyfitness.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Journey Fitness. All rights reserved.</p>
+        </div>
+
+        <!-- Scroll to Top Button -->
+        <button class="scroll-to-top" id="scrollToTop">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+    </footer>
+
+    <!-- Smooth Custom Cursor -->
+    <div class="custom-cursor" id="customCursor">
+        <div class="cursor-inner"></div>
+        <div class="cursor-outer"></div>
+    </div>
+
+    <script>
+        // Hamburger Menu Functionality
+        const hamburgerMenu = document.getElementById('hamburgerMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+        const mobileContactBtn = document.getElementById('mobileContactBtn');
+
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            hamburgerMenu.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+
+            // Prevent body scroll when menu is open
+            if (mobileMenu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Close mobile menu when clicking on overlay
+        mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
+
+        // Close mobile menu when clicking on a link
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', toggleMobileMenu);
+        });
+
+        // Toggle mobile menu when hamburger is clicked
+        hamburgerMenu.addEventListener('click', toggleMobileMenu);
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        // Check for saved theme preference or default to light
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            body.classList.add('dark-theme');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            mobileThemeToggle.innerHTML = '<i class="fas fa-sun"></i> Toggle Theme';
+        }
+
+        function toggleTheme() {
+            body.classList.toggle('dark-theme');
+
+            if (body.classList.contains('dark-theme')) {
+                localStorage.setItem('theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                mobileThemeToggle.innerHTML = '<i class="fas fa-sun"></i> Toggle Theme';
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                mobileThemeToggle.innerHTML = '<i class="fas fa-moon"></i> Toggle Theme';
+            }
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
+        mobileThemeToggle.addEventListener('click', toggleTheme);
+
+        // Enhanced loading animation
+        window.addEventListener('load', function () {
+            const loader = document.querySelector('.loader');
+
+            // Add a minimum display time for better UX
+            setTimeout(function () {
+                loader.classList.add('hidden');
+
+                // Initialize animations after page loads
+                initGSAPAnimations();
+                initStatsCounter();
+            }, 2000); // Show loader for 2 seconds minimum
+        });
+
+        // GSAP Animations
+        function initGSAPAnimations() {
+            // Register ScrollTrigger plugin
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Set initial states for elements to be animated
+            gsap.set('.hero-title .line, .hero-subtitle, .hero-btn', { opacity: 0, y: 50 });
+            gsap.set('#about .content-text', { opacity: 0, x: -50 });
+            gsap.set('#about .interactive-grid .grid-item', { opacity: 0, x: 50 });
+            gsap.set('.team-member', { opacity: 0, y: 100 });
+            gsap.set('.class-card', { opacity: 0, y: 80 });
+            gsap.set('.stat-item', { opacity: 0, scale: 0.8 });
+            gsap.set('.membership-card', { opacity: 0 });
+            gsap.set('.contact-info', { opacity: 0, x: -100 });
+            gsap.set('.contact-form', { opacity: 0, x: 100 });
+
+            // 1. Home Page Hero Animation
+            gsap.timeline()
+                .to('.hero-title .line', {
+                    duration: 1.2,
+                    y: 0,
+                    opacity: 1,
+                    stagger: 0.3,
+                    ease: "power3.out"
+                })
+                .to('.hero-subtitle', {
+                    duration: 1,
+                    y: 0,
+                    opacity: 1,
+                    ease: "power2.out"
+                }, "-=0.5")
+                .to('.hero-btn', {
+                    duration: 0.8,
+                    y: 0,
+                    opacity: 1,
+                    ease: "back.out(1.7)"
+                }, "-=0.3");
+
+            // 2. Who We Are Section
+            gsap.timeline({
+                scrollTrigger: {
+                    trigger: '#about',
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                }
+            })
+                .to('#about .content-text', {
+                    duration: 1,
+                    x: 0,
+                    opacity: 1,
+                    ease: "power3.out"
+                })
+                .to('#about .interactive-grid .grid-item', {
+                    duration: 1,
+                    x: 0,
+                    opacity: 1,
+                    stagger: 0.2,
+                    ease: "power3.out"
+                }, "-=0.5");
+
+            // 3. Meet The Team Section
+            // First 4 cards (first row) - appear slowly one by one from bottom
+            gsap.to('.team-member:nth-child(-n+4)', {
+                duration: 1.2,
+                y: 0,
+                opacity: 1,
+                stagger: 0.3,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: '#team',
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            });
+
+            // Next 4 cards (second row) - appear when scrolled further
+            gsap.to('.team-member:nth-child(n+5)', {
+                duration: 1.2,
+                y: 0,
+                opacity: 1,
+                stagger: 0.3,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: '.team-member:nth-child(4)',
+                    start: 'top 90%',
+                    toggleActions: 'play none none none'
+                }
+            });
+
+            // 4. Featured Classes Section
+            // First 3 cards - appear slowly from bottom
+            gsap.to('.class-card:nth-child(-n+3)', {
+                duration: 1.2,
+                y: 0,
+                opacity: 1,
+                stagger: 0.4,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: '#classes',
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                }
+            });
+
+            // Next 3 cards - appear when scrolled further
+            gsap.to('.class-card:nth-child(n+4)', {
+                duration: 1.2,
+                y: 0,
+                opacity: 1,
+                stagger: 0.4,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: '.class-card:nth-child(3)',
+                    start: 'top 70%',
+                    toggleActions: 'play none none none'
+                }
+            });
+
+            // 5. Stats Cards
+            gsap.to('.stat-item', {
+                duration: 0.8,
+                scale: 1,
+                opacity: 1,
+                stagger: 0.15,
+                ease: "back.out(1.7)",
+                scrollTrigger: {
+                    trigger: '.stats',
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                }
+            });
+
+            // 6. Memberships Section - FIXED VERSION
+            const membershipCards = gsap.utils.toArray('.membership-card');
+
+            // Set initial positions - middle card starts from bottom, side cards from sides
+            gsap.set(membershipCards[1], { y: 100, opacity: 0 }); // Middle card from bottom
+            gsap.set(membershipCards[0], { x: -100, opacity: 0 }); // Left card from left
+            gsap.set(membershipCards[2], { x: 100, opacity: 0 });  // Right card from right
+
+            // First animate ONLY the middle card from bottom
+            gsap.to(membershipCards[1], {
+                duration: 1.2,
+                y: 0,
+                opacity: 1,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: '#memberships',
+                    start: 'top 75%',
+                    toggleActions: 'play none none none'
+                },
+                onComplete: function () {
+                    // After middle card animation completes, animate the side cards
+                    gsap.timeline()
+                        .to(membershipCards[0], {
+                            duration: 1,
+                            x: 0,
+                            opacity: 1,
+                            ease: "power3.out"
+                        })
+                        .to(membershipCards[2], {
+                            duration: 1,
+                            x: 0,
+                            opacity: 1,
+                            ease: "power3.out"
+                        }, "-=0.5"); // Overlap slightly
+                }
+            });
+
+            // 7. Contact Section - FIXED VERSION
+            gsap.timeline({
+                scrollTrigger: {
+                    trigger: '#contact',
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                }
+            })
+                .to('.contact-info', {
+                    duration: 1.2,
+                    x: 0,
+                    opacity: 1,
+                    ease: "power3.out"
+                })
+                .to('.contact-form', {
+                    duration: 1.2,
+                    x: 0,
+                    opacity: 1,
+                    ease: "power3.out"
+                }, "-=0.8"); // Start form animation at the same time as info
+        }
+
+        // Stats counting animation
+        function initStatsCounter() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+
+            // Create a ScrollTrigger for the stats section
+            gsap.to(statNumbers, {
+                scrollTrigger: {
+                    trigger: '.stats',
+                    start: 'top 80%',
+                    onEnter: () => animateStats(),
+                    once: true // Only trigger once
+                }
+            });
+
+            function animateStats() {
+                statNumbers.forEach(stat => {
+                    const target = parseInt(stat.getAttribute('data-target'));
+                    const duration = 2000; // 2 seconds
+                    const step = target / (duration / 16); // 60fps
+
+                    let current = 0;
+                    const timer = setInterval(() => {
+                        current += step;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        stat.textContent = Math.floor(current);
+                    }, 16);
+                });
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-links a, .footer-links a, .mobile-nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function () {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Newsletter form submission
+        document.querySelector('.newsletter-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const email = this.querySelector('input').value;
+            if (email) {
+                alert('Thank you for subscribing!');
+                this.querySelector('input').value = '';
+            }
+        });
+
+        // Add click handlers for buttons
+        document.querySelectorAll('.class-btn, .hero-btn, .membership-card .class-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Contact section functionality
+        const contactBtn = document.getElementById('contactBtn');
+        const contactSection = document.getElementById('contact');
+
+        function scrollToContact() {
+            contactSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+
+            setTimeout(() => {
+                ScrollTrigger.refresh();
+            }, 500);
+        }
+
+        contactBtn.addEventListener('click', scrollToContact);
+        mobileContactBtn.addEventListener('click', function () {
+            toggleMobileMenu();
+            scrollToContact();
+        });
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            if (name && email && subject && message) {
+                alert('Thank you for your message! We will get back to you soon.');
+                this.reset();
+            } else {
+                alert('Please fill in all fields.');
+            }
+        });
+
+        // Smooth Custom Cursor with Pointer State
+        const cursor = document.getElementById('customCursor');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+        let speed = 0.15;
+
+        // Animate cursor with smooth easing
+        function animateCursor() {
+            let dx = mouseX - cursorX;
+            let dy = mouseY - cursorY;
+
+            cursorX += dx * speed;
+            cursorY += dy * speed;
+
+            cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+            requestAnimationFrame(animateCursor);
+        }
+
+        // Track mouse position
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // Pointer elements (links, buttons, etc.)
+        const pointers = document.querySelectorAll(
+            'a, button, .class-btn, .cta-btn, .hero-btn, .mobile-cta-btn, .submit-btn, .newsletter-btn, .theme-toggle, .mobile-theme-toggle, .hamburger-menu'
+        );
+
+        // Hover elements (cards, interactive items)
+        const hoverElements = document.querySelectorAll(
+            '.class-card, .team-member, .membership-card, .interactive-grid .grid-item, .stat-item'
+        );
+
+        // Pointer state (filled circle)
+        pointers.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('cursor-pointer', 'cursor-hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-pointer', 'cursor-hover'));
+        });
+
+        // Hover state (enlarged dot with ring)
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
+        });
+
+        // Click animation
+        document.addEventListener('mousedown', () => cursor.classList.add('cursor-click'));
+        document.addEventListener('mouseup', () => cursor.classList.remove('cursor-click'));
+
+        // Hide cursor when leaving window
+        document.addEventListener('mouseout', (e) => {
+            if (!e.relatedTarget) cursor.style.opacity = '0';
+        });
+        document.addEventListener('mouseover', () => cursor.style.opacity = '1');
+
+        // Start animation
+        animateCursor();
+
+        // NEW FEATURES ADDED:
+
+        // 1. Button Navigation
+        const heroBtn = document.getElementById('heroBtn');
+        const bookBtns = document.querySelectorAll('.book-btn');
+        const joinBtns = document.querySelectorAll('.join-btn');
+        const membershipsSection = document.getElementById('memberships');
+
+        // Hero button scrolls to memberships
+        heroBtn.addEventListener('click', function () {
+            membershipsSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+
+        // Book and Join buttons scroll to contact
+        bookBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                contactSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        joinBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                contactSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // // 2. Enhanced button ripple effects
+        // const rippleButtons = document.querySelectorAll('.ripple-btn');
+
+        // rippleButtons.forEach(button => {
+        //     button.addEventListener('click', function (e) {
+        //         // Create ripple element
+        //         const ripple = document.createElement('span');
+        //         const rect = this.getBoundingClientRect();
+        //         const size = Math.max(rect.width, rect.height);
+        //         const x = e.clientX - rect.left - size / 2;
+        //         const y = e.clientY - rect.top - size / 2;
+
+        //         ripple.style.width = ripple.style.height = size + 'px';
+        //         ripple.style.left = x + 'px';
+        //         ripple.style.top = y + 'px';
+        //         ripple.classList.add('ripple-effect');
+
+        //         this.appendChild(ripple);
+
+        //         // Remove ripple after animation
+        //         setTimeout(() => {
+        //             ripple.remove();
+        //         }, 600);
+        //     });
+        // });
+        // Enhanced logo interaction
+        const logo = document.querySelector('.logo');
+        const footerLogo = document.querySelector('.footer-logo');
+
+        // Add click animation to logo
+        function animateLogo() {
+            logo.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                logo.style.transform = 'scale(1)';
+            }, 150);
+
+            // Scroll to top when logo is clicked
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        logo.addEventListener('click', animateLogo);
+        footerLogo.addEventListener('click', animateLogo);
+
+        // Add GSAP animation for logo on page load
+        gsap.to('.logo', {
+            duration: 1,
+            scale: 1,
+            opacity: 1,
+            ease: "back.out(1.7)",
+            delay: 0.5
+        });
+        // 3. Ensure no horizontal scrolling
+        window.addEventListener('resize', function () {
+            if (document.documentElement.scrollWidth > window.innerWidth) {
+                document.body.style.overflowX = 'hidden';
+            }
+        });
+
+        // Scroll to Top Functionality
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+
+        // Show/hide scroll to top button
+        window.addEventListener('scroll', function () {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        // Scroll to top when clicked
+        scrollToTopBtn.addEventListener('click', function () {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+
+</html>
