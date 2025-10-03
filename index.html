@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Journey Fitness - Transform Your Body</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Roboto:wght@300;400;500;700&display=swap"
@@ -13,9 +12,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
-        /* Previous CSS remains the same until we add the new button effects */
-
-        /* Ripple Effect for Buttons */
         .ripple-btn {
             position: relative;
             overflow: hidden;
@@ -45,7 +41,6 @@
             transition: 0s;
         }
 
-        /* Enhanced button hover effects */
         .hero-btn,
         .class-btn,
         .cta-btn,
@@ -54,7 +49,6 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
         }
 
-        /* Scroll to Top Button */
         .scroll-to-top {
             position: fixed;
             bottom: 30px;
@@ -79,9 +73,9 @@
         }
 
         body.dark-theme .scroll-to-top {
-            background: #ffff00;
-            color: #000;
-            box-shadow: 0 5px 15px rgba(255, 255, 0, 0.3);
+            background: #ff6b35;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
         }
 
         .scroll-to-top.visible {
@@ -97,22 +91,20 @@
         }
 
         body.dark-theme .scroll-to-top:hover {
-            background: #e6e600;
-            box-shadow: 0 8px 20px rgba(255, 255, 0, 0.4);
+            background: #e55a2b;
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
         }
 
         .scroll-to-top:active {
             transform: translateY(-1px);
         }
 
-        /* Ensure no horizontal scrolling */
         html,
         body {
             max-width: 100%;
             overflow-x: hidden;
         }
 
-        /* Rest of the CSS remains exactly the same */
         * {
             margin: 0;
             padding: 0;
@@ -127,11 +119,8 @@
             overflow-x: hidden;
             transition: background-color 0.5s ease, color 0.5s ease;
             user-select: none;
-            /* Prevents text selection */
             -webkit-user-select: none;
-            /* For Safari */
             -ms-user-select: none;
-            /* For old IE */
         }
 
         body.dark-theme {
@@ -150,7 +139,6 @@
             letter-spacing: 1px;
         }
 
-        /* Header */
         .header {
             position: fixed;
             top: 0;
@@ -186,7 +174,6 @@
             padding: 0 2rem;
         }
 
-        /* Logo Styles */
         .logo {
             display: flex;
             align-items: center;
@@ -205,10 +192,9 @@
         }
 
         body.dark-theme .logo-text {
-            color: #ffff00;
+            color: #ff6b35;
         }
 
-        /* Logo animation on hover */
         .logo:hover .logo-text {
             animation: logoGlow 1.5s ease-in-out infinite alternate;
         }
@@ -224,20 +210,9 @@
         }
 
         body.dark-theme .logo:hover .logo-text {
-            animation: logoGlowDark 1.5s ease-in-out infinite alternate;
+            animation: logoGlow 1.5s ease-in-out infinite alternate;
         }
 
-        @keyframes logoGlowDark {
-            from {
-                text-shadow: 0 0 5px rgba(255, 255, 0, 0.5);
-            }
-
-            to {
-                text-shadow: 0 0 15px rgba(255, 255, 0, 0.8), 0 0 20px rgba(255, 255, 0, 0.6);
-            }
-        }
-
-        /* Footer logo styling */
         .footer-logo {
             font-size: 1.5rem;
             font-weight: bold;
@@ -250,10 +225,9 @@
         }
 
         body.dark-theme .footer-logo {
-            color: #ffff00;
+            color: #ff6b35;
         }
 
-        /* Desktop Navigation */
         .nav-links {
             display: flex;
             list-style: none;
@@ -276,7 +250,6 @@
             color: #ffffff;
         }
 
-        /* Nav Link Hover Effect */
         .nav-links a:before {
             content: '';
             position: absolute;
@@ -291,7 +264,7 @@
         }
 
         body.dark-theme .nav-links a:before {
-            background-color: #ffff00;
+            background-color: #ff6b35;
         }
 
         .nav-links a:hover:before {
@@ -304,7 +277,7 @@
         }
 
         body.dark-theme .nav-links a:hover {
-            color: #ffff00;
+            color: #ff6b35;
         }
 
         .nav-buttons {
@@ -313,7 +286,6 @@
             gap: 1rem;
         }
 
-        /* Theme Toggle */
         .theme-toggle {
             background: #ff6b35;
             color: #fff;
@@ -330,8 +302,8 @@
         }
 
         body.dark-theme .theme-toggle {
-            background: #ffff00;
-            color: #000;
+            background: #ff6b35;
+            color: #fff;
         }
 
         .theme-toggle:hover {
@@ -352,8 +324,8 @@
         }
 
         body.dark-theme .cta-btn {
-            background: #ffff00;
-            color: #000;
+            background: #ff6b35;
+            color: #fff;
         }
 
         .cta-btn:hover {
@@ -363,11 +335,10 @@
         }
 
         body.dark-theme .cta-btn:hover {
-            background: #e6e600;
-            box-shadow: 0 5px 15px rgba(255, 255, 0, 0.3);
+            background: #e55a2b;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
         }
 
-        /* Hamburger Menu Styles */
         .hamburger-menu {
             display: none;
             flex-direction: column;
@@ -390,7 +361,7 @@
         }
 
         body.dark-theme .hamburger-menu span {
-            background-color: #ffff00;
+            background-color: #ff6b35;
         }
 
         .hamburger-menu span:nth-child(1) {
@@ -405,7 +376,6 @@
             top: 20px;
         }
 
-        /* Hamburger Menu Active State */
         .hamburger-menu.active span:nth-child(1) {
             transform: rotate(45deg);
             top: 10px;
@@ -420,7 +390,6 @@
             top: 10px;
         }
 
-        /* Mobile Menu Styles */
         .mobile-menu {
             position: fixed;
             top: 0;
@@ -503,7 +472,7 @@
         }
 
         body.dark-theme .mobile-nav-links a:before {
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 0, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.2), transparent);
         }
 
         .mobile-nav-links a:hover:before {
@@ -516,7 +485,7 @@
         }
 
         body.dark-theme .mobile-nav-links a:hover {
-            background-color: rgba(255, 255, 0, 0.1);
+            background-color: rgba(255, 107, 53, 0.1);
         }
 
         .mobile-nav-buttons {
@@ -543,8 +512,8 @@
         }
 
         body.dark-theme .mobile-theme-toggle {
-            background: #ffff00;
-            color: #000;
+            background: #ff6b35;
+            color: #fff;
         }
 
         .mobile-theme-toggle:hover {
@@ -553,7 +522,7 @@
         }
 
         body.dark-theme .mobile-theme-toggle:hover {
-            background: #e6e600;
+            background: #e55a2b;
         }
 
         .mobile-cta-btn {
@@ -572,8 +541,8 @@
         }
 
         body.dark-theme .mobile-cta-btn {
-            background: #ffff00;
-            color: #000;
+            background: #ff6b35;
+            color: #fff;
         }
 
         .mobile-cta-btn:hover {
@@ -583,11 +552,10 @@
         }
 
         body.dark-theme .mobile-cta-btn:hover {
-            background: #e6e600;
-            box-shadow: 0 5px 15px rgba(255, 255, 0, 0.3);
+            background: #e55a2b;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
         }
 
-        /* Hero Section */
         .hero {
             height: 100vh;
             background: linear-gradient(rgba(248, 249, 250, 0.7), rgba(248, 249, 250, 0.7)), url('./equipments.jpeg');
@@ -617,7 +585,7 @@
         }
 
         body.dark-theme .hero:before {
-            background: linear-gradient(45deg, rgba(255, 255, 0, 0.1), rgba(255, 255, 0, 0));
+            background: linear-gradient(45deg, rgba(255, 107, 53, 0.1), rgba(255, 107, 53, 0));
         }
 
         .hero-content {
@@ -661,7 +629,7 @@
         }
 
         body.dark-theme .hero-title .highlight {
-            color: #ffff00;
+            color: #ff6b35;
         }
 
         .hero-subtitle {
@@ -697,8 +665,8 @@
         }
 
         body.dark-theme .hero-btn {
-            background: #ffff00;
-            color: #000;
+            background: #ff6b35;
+            color: #fff;
         }
 
         .hero-btn:hover {
@@ -707,11 +675,10 @@
         }
 
         body.dark-theme .hero-btn:hover {
-            background: #e6e600;
-            box-shadow: 0 10px 30px rgba(255, 255, 0, 0.3);
+            background: #e55a2b;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
         }
 
-        /* Section Styles */
         .section {
             padding: 6rem 2rem;
             max-width: 1200px;
@@ -759,7 +726,6 @@
             opacity: 0.9;
         }
 
-        /* Unique Who We Are Section - Interactive Image Grid */
         .interactive-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -815,8 +781,8 @@
         }
 
         body.dark-theme .grid-item .overlay {
-            background: rgba(255, 255, 0, 0.8);
-            color: #000;
+            background: rgba(255, 107, 53, 0.8);
+            color: #fff;
         }
 
         .grid-item:hover .overlay {
@@ -838,7 +804,6 @@
             grid-row: 2 / 3;
         }
 
-        /* Team Grid */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -906,7 +871,7 @@
         }
 
         body.dark-theme .member-role {
-            color: #ffff00;
+            color: #ff6b35;
         }
 
         .classes-grid {
@@ -970,7 +935,7 @@
         }
 
         body.dark-theme .class-image:after {
-            background: linear-gradient(45deg, rgba(255, 255, 0, 0.3), rgba(255, 255, 0, 0.1));
+            background: linear-gradient(45deg, rgba(255, 107, 53, 0.3), rgba(255, 107, 53, 0.1));
         }
 
         .class-card:hover .class-image:after {
@@ -1005,8 +970,8 @@
         }
 
         body.dark-theme .class-btn {
-            background: #ffff00;
-            color: #000;
+            background: #ff6b35;
+            color: #fff;
         }
 
         .class-btn:hover {
@@ -1016,11 +981,10 @@
         }
 
         body.dark-theme .class-btn:hover {
-            background: #e6e600;
-            box-shadow: 0 5px 15px rgba(255, 255, 0, 0.3);
+            background: #e55a2b;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
         }
 
-        /* Stats */
         .stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -1058,7 +1022,7 @@
         }
 
         body.dark-theme .stat-number {
-            color: #ffff00;
+            color: #ff6b35;
         }
 
         .stat-label {
@@ -1069,7 +1033,6 @@
             font-weight: 500;
         }
 
-        /* Memberships */
         .membership-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -1099,7 +1062,7 @@
         }
 
         body.dark-theme .membership-card:hover {
-            border-color: #ffff00;
+            border-color: #ff6b35;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
 
@@ -1111,9 +1074,9 @@
         }
 
         body.dark-theme .membership-card.featured {
-            background: #ffff00;
-            color: #000;
-            border-color: #ffff00;
+            background: #ff6b35;
+            color: #fff;
+            border-color: #ff6b35;
         }
 
         .membership-card.featured:hover {
@@ -1125,7 +1088,7 @@
         }
 
         body.dark-theme .membership-card.featured .membership-price {
-            color: #000;
+            color: #fff;
         }
 
         .membership-title {
@@ -1145,7 +1108,7 @@
         }
 
         body.dark-theme .membership-price {
-            color: #ffff00;
+            color: #ff6b35;
         }
 
         .membership-features {
@@ -1162,7 +1125,6 @@
             border-bottom: 1px solid #333;
         }
 
-        /* Contact Section */
         .contact-section {
             padding: 6rem 2rem;
             max-width: 1200px;
@@ -1201,8 +1163,8 @@
         }
 
         body.dark-theme .contact-icon {
-            background: #ffff00;
-            color: #000;
+            background: #ff6b35;
+            color: #fff;
         }
 
         .contact-text h3 {
@@ -1212,7 +1174,7 @@
         }
 
         body.dark-theme .contact-text h3 {
-            color: #ffff00;
+            color: #ff6b35;
         }
 
         .contact-form {
@@ -1261,8 +1223,8 @@
         }
 
         body.dark-theme .form-control:focus {
-            border-color: #ffff00;
-            box-shadow: 0 0 0 2px rgba(255, 255, 0, 0.2);
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.2);
         }
 
         textarea.form-control {
@@ -1286,8 +1248,8 @@
         }
 
         body.dark-theme .submit-btn {
-            background: #ffff00;
-            color: #000;
+            background: #ff6b35;
+            color: #fff;
         }
 
         .submit-btn:hover {
@@ -1297,11 +1259,10 @@
         }
 
         body.dark-theme .submit-btn:hover {
-            background: #e6e600;
-            box-shadow: 0 5px 15px rgba(255, 255, 0, 0.3);
+            background: #e55a2b;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
         }
 
-        /* Newsletter */
         .newsletter {
             background: #ff6b35;
             color: #fff;
@@ -1310,8 +1271,8 @@
         }
 
         body.dark-theme .newsletter {
-            background: #ffff00;
-            color: #000;
+            background: #ff6b35;
+            color: #fff;
         }
 
         .newsletter-title {
@@ -1353,7 +1314,7 @@
 
         body.dark-theme .newsletter-btn {
             background: #000;
-            color: #ffff00;
+            color: #ff6b35;
         }
 
         .newsletter-btn:hover {
@@ -1361,7 +1322,6 @@
             transform: translateY(-2px);
         }
 
-        /* Footer */
         .footer {
             background: #f8f9fa;
             padding: 3rem 2rem;
@@ -1394,7 +1354,7 @@
         }
 
         body.dark-theme .footer-logo {
-            color: #ffff00;
+            color: #ff6b35;
         }
 
         .footer-links {
@@ -1420,7 +1380,7 @@
         }
 
         body.dark-theme .footer-links a:hover {
-            color: #ffff00;
+            color: #ff6b35;
         }
 
         .footer-bottom {
@@ -1434,7 +1394,6 @@
             border-top: 1px solid #333;
         }
 
-        /* Responsive */
         @media (max-width: 1024px) {
             .nav-links {
                 gap: 1.5rem;
@@ -1539,8 +1498,6 @@
             }
 
             @media (max-width: 768px) {
-
-                /* Add this for section titles on mobile */
                 .section-title {
                     font-size: 2rem;
                     line-height: 1.2;
@@ -1549,13 +1506,11 @@
                     text-align: center;
                 }
 
-                /* Adjust section number for mobile */
                 .section-number {
                     font-size: 6rem;
                     margin-bottom: -3rem;
                 }
 
-                /* Ensure proper spacing for membership section */
                 #memberships .section {
                     padding: 4rem 1rem;
                 }
@@ -1603,7 +1558,6 @@
             }
         }
 
-        /* Animations */
         @keyframes heroFadeIn {
             from {
                 opacity: 0;
@@ -1632,7 +1586,6 @@
             animation: fadeInUp 0.8s ease-out;
         }
 
-        /* Scroll animations */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -1644,7 +1597,6 @@
             transform: translateY(0);
         }
 
-        /* Custom Cursor Styles */
         * {
             cursor: none !important;
         }
@@ -1674,7 +1626,7 @@
         }
 
         body.dark-theme .cursor-inner {
-            background-color: #ffff00;
+            background-color: #ff6b35;
         }
 
         .cursor-outer {
@@ -1691,10 +1643,9 @@
         }
 
         body.dark-theme .cursor-outer {
-            border-color: #ffff00;
+            border-color: #ff6b35;
         }
 
-        /* Pointer State (filled circle) */
         .cursor-pointer .cursor-inner {
             width: 40px;
             height: 40px;
@@ -1707,10 +1658,9 @@
         }
 
         body.dark-theme .cursor-pointer .cursor-inner {
-            background-color: #ffff00;
+            background-color: #ff6b35;
         }
 
-        /* Hover states */
         .cursor-hover .cursor-inner {
             transform: translate(-50%, -50%) scale(1.3);
         }
@@ -1719,12 +1669,10 @@
             transform: translate(-50%, -50%) scale(1.1);
         }
 
-        /* Click animation */
         .cursor-click .cursor-inner {
             transform: translate(-50%, -50%) scale(0.8);
         }
 
-        /* Hide custom cursor on touch devices */
         @media (hover: none) and (pointer: coarse) {
             .custom-cursor {
                 display: none;
@@ -1735,7 +1683,6 @@
             }
         }
 
-        /* Enhanced Loader Styles */
         .loader {
             position: fixed;
             top: 0;
@@ -1768,7 +1715,6 @@
             gap: 2rem;
         }
 
-        /* Animated Journey Text */
         .loader-text {
             font-family: 'Orbitron', sans-serif;
             font-size: 2.5rem;
@@ -1784,13 +1730,12 @@
         }
 
         body.dark-theme .loader-text {
-            background: linear-gradient(45deg, #ffff00, #ff9900, #ffff00);
+            background: linear-gradient(45deg, #ff6b35, #ff8e53, #ff6b35);
             background-size: 200% 200%;
             -webkit-background-clip: text;
             background-clip: text;
         }
 
-        /* Fitness-inspired Loading Animation */
         .loader-animation {
             display: flex;
             align-items: center;
@@ -1807,7 +1752,7 @@
         }
 
         body.dark-theme .barbell {
-            background: linear-gradient(90deg, #ffff00, #ff9900, #ffff00);
+            background: linear-gradient(90deg, #ff6b35, #ff8e53, #ff6b35);
         }
 
         .barbell::before,
@@ -1824,7 +1769,7 @@
 
         body.dark-theme .barbell::before,
         body.dark-theme .barbell::after {
-            background: #ffff00;
+            background: #ff6b35;
         }
 
         .barbell::before {
@@ -1835,7 +1780,6 @@
             right: -10px;
         }
 
-        /* Progress Bar */
         .loader-progress {
             width: 200px;
             height: 4px;
@@ -1846,7 +1790,7 @@
         }
 
         body.dark-theme .loader-progress {
-            background: rgba(255, 255, 0, 0.2);
+            background: rgba(255, 107, 53, 0.2);
         }
 
         .loader-progress-bar {
@@ -1858,10 +1802,9 @@
         }
 
         body.dark-theme .loader-progress-bar {
-            background: linear-gradient(90deg, #ffff00, #ff9900);
+            background: linear-gradient(90deg, #ff6b35, #ff8e53);
         }
 
-        /* Loading Dots */
         .loading-dots {
             display: flex;
             gap: 0.5rem;
@@ -1876,7 +1819,7 @@
         }
 
         body.dark-theme .loading-dot {
-            background: #ffff00;
+            background: #ff6b35;
         }
 
         .loading-dot:nth-child(2) {
@@ -1887,7 +1830,6 @@
             animation-delay: 0.4s;
         }
 
-        /* Animations */
         @keyframes barbellLift {
 
             0%,
@@ -1961,44 +1903,6 @@
             }
         }
 
-        /* Fix hero section for mobile devices */
-.hero {
-    min-height: 100vh;
-    padding-top: 80px; /* Add padding to prevent overlap */
-    height: auto; /* Change from fixed height to auto */
-}
-
-/* Ensure hero content is properly spaced */
-.hero-content {
-    padding-top: 2rem; /* Extra spacing from top */
-    padding-bottom: 2rem;
-}
-
-/* Mobile-specific fixes */
-@media (max-width: 768px) {
-    .hero {
-        padding-top: 100px; /* More padding on mobile */
-        min-height: calc(100vh - 60px); /* Account for navbar */
-    }
-    
-    .hero-title {
-        margin-top: 1rem; /* Extra spacing */
-    }
-    
-    .hero-content {
-        padding: 1rem;
-    }
-}
-
-/* Extra small devices */
-@media (max-width: 480px) {
-    .hero {
-        padding-top: 120px; /* Even more padding for very small screens */
-        min-height: calc(100vh - 80px);
-    }
-}
-
-        /* Enhanced Button Click Effects */
         .hero-btn,
         .class-btn,
         .cta-btn,
@@ -2015,7 +1919,6 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* Pulse Effect on Click */
         .hero-btn:active,
         .class-btn:active,
         .cta-btn:active,
@@ -2053,24 +1956,9 @@
         body.dark-theme .theme-toggle:active,
         body.dark-theme .join-btn:active,
         body.dark-theme .book-btn:active {
-            animation: buttonPulseDark 0.4s ease-out;
+            animation: buttonPulse 0.4s ease-out;
         }
 
-        @keyframes buttonPulseDark {
-            0% {
-                box-shadow: 0 0 0 0 rgba(255, 255, 0, 0.7);
-            }
-
-            70% {
-                box-shadow: 0 0 0 15px rgba(255, 255, 0, 0);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(255, 255, 0, 0);
-            }
-        }
-
-        /* Scale Down Effect */
         .hero-btn:active,
         .class-btn:active,
         .cta-btn:active,
@@ -2082,13 +1970,6 @@
         .join-btn:active,
         .book-btn:active {
             transform: scale(0.95);
-        }
-
-        /* Enhanced Ripple Effect */
-        .ripple-btn {
-            position: relative;
-            overflow: hidden;
-            transform: translate3d(0, 0, 0);
         }
 
         .ripple-btn::before {
@@ -2111,12 +1992,10 @@
             transition: width 0.6s ease, height 0.6s ease, opacity 0.6s ease;
         }
 
-        /* Dark theme ripple */
         body.dark-theme .ripple-btn::before {
             background: rgba(0, 0, 0, 0.3);
         }
 
-        /* Glow Effect on Click */
         .hero-btn:active,
         .class-btn:active,
         .cta-btn:active,
@@ -2125,7 +2004,6 @@
             filter: brightness(1.2) saturate(1.3);
         }
 
-        /* Bounce Effect for Specific Buttons */
         .theme-toggle:active,
         .mobile-theme-toggle:active {
             animation: themeBounce 0.3s ease;
@@ -2143,7 +2021,6 @@
             }
         }
 
-        /* Success Feedback for Form Buttons */
         .submit-btn.click-success {
             background: #4CAF50 !important;
             animation: successGlow 1s ease;
@@ -2163,7 +2040,6 @@
             }
         }
 
-        /* Loading State for Buttons */
         .button-loading {
             position: relative;
             color: transparent !important;
@@ -2198,7 +2074,6 @@
             }
         }
 
-        /* Magnetic Button Effect */
         .magnetic-btn {
             position: relative;
             transition: transform 0.3s cubic-bezier(0.23, 1, 0.320, 1);
@@ -2208,7 +2083,6 @@
             transform: translate(var(--tx, 0), var(--ty, 0)) scale(1.05);
         }
 
-        /* Shimmer Effect on Click */
         .shimmer-btn:active {
             background-image: linear-gradient(90deg,
                     transparent,
@@ -2228,13 +2102,11 @@
             }
         }
 
-        /* 3D Press Effect */
         .press-3d:active {
             transform: translateY(4px) scale(0.98);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
-        /* Confetti Effect Container */
         .confetti-container {
             position: fixed;
             top: 0;
@@ -2255,7 +2127,7 @@
         }
 
         body.dark-theme .confetti {
-            background: #ffff00;
+            background: #ff6b35;
         }
 
         @keyframes confettiFall {
@@ -2273,7 +2145,6 @@
 </head>
 
 <body>
-    <!-- Enhanced Fitness Loader -->
     <div class="loader">
         <div class="loader-content">
             <div class="loader-text">JOURNEY FITNESS</div>
@@ -2298,10 +2169,8 @@
         </div>
     </div>
 
-    <!-- Mobile Menu Overlay -->
     <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 
-    <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
         <ul class="mobile-nav-links">
             <li><a href="#home" class="mobile-nav-link">Home</a></li>
@@ -2318,7 +2187,6 @@
         </div>
     </div>
 
-    <!-- Header -->
     <header class="header">
         <nav class="nav">
             <div class="logo">
@@ -2337,7 +2205,6 @@
                 </button>
                 <button class="cta-btn ripple-btn" id="contactBtn">Contact</button>
             </div>
-            <!-- Hamburger Menu -->
             <div class="hamburger-menu" id="hamburgerMenu">
                 <span></span>
                 <span></span>
@@ -2346,7 +2213,6 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
             <h1 class="hero-title">
@@ -2366,7 +2232,6 @@
         </div>
     </section>
 
-    <!-- Who We Are -->
     <section class="section" id="about">
         <div class="section-number">01</div>
         <h2 class="section-title">Who We Are</h2>
@@ -2397,7 +2262,6 @@
         </div>
     </section>
 
-    <!-- Meet The Team -->
     <section class="section" id="team">
         <div class="section-number">02</div>
         <h2 class="section-title">Meet The Team</h2>
@@ -2477,7 +2341,6 @@
         </div>
     </section>
 
-    <!-- Featured Classes -->
     <section class="section" id="classes">
         <div class="section-number">03</div>
         <h2 class="section-title">Featured Classes</h2>
@@ -2539,7 +2402,6 @@
         </div>
     </section>
 
-    <!-- Stats Section -->
     <section class="stats">
         <div class="stat-item">
             <div class="stat-number" data-target="45">0</div>
@@ -2559,7 +2421,6 @@
         </div>
     </section>
 
-    <!-- Memberships -->
     <section class="section" id="memberships">
         <div class="section-number">04</div>
         <h2 class="section-title">Memberships</h2>
@@ -2598,7 +2459,6 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section class="section contact-section" id="contact">
         <div class="section-number">05</div>
         <h2 class="section-title">Contact Us</h2>
@@ -2666,7 +2526,6 @@
         </div>
     </section>
 
-    <!-- Newsletter -->
     <section class="newsletter">
         <h2 class="newsletter-title">Subscribe to Our Newsletter</h2>
         <form class="newsletter-form">
@@ -2675,7 +2534,6 @@
         </form>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <div>
@@ -2701,20 +2559,17 @@
             <p>&copy; 2023 Journey Fitness. All rights reserved.</p>
         </div>
 
-        <!-- Scroll to Top Button -->
         <button class="scroll-to-top" id="scrollToTop">
             <i class="fas fa-chevron-up"></i>
         </button>
     </footer>
 
-    <!-- Smooth Custom Cursor -->
     <div class="custom-cursor" id="customCursor">
         <div class="cursor-inner"></div>
         <div class="cursor-outer"></div>
     </div>
 
     <script>
-        // Hamburger Menu Functionality
         const hamburgerMenu = document.getElementById('hamburgerMenu');
         const mobileMenu = document.getElementById('mobileMenu');
         const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
@@ -2722,13 +2577,11 @@
         const mobileThemeToggle = document.getElementById('mobileThemeToggle');
         const mobileContactBtn = document.getElementById('mobileContactBtn');
 
-        // Toggle mobile menu
         function toggleMobileMenu() {
             hamburgerMenu.classList.toggle('active');
             mobileMenu.classList.toggle('active');
             mobileMenuOverlay.classList.toggle('active');
 
-            // Prevent body scroll when menu is open
             if (mobileMenu.classList.contains('active')) {
                 document.body.style.overflow = 'hidden';
             } else {
@@ -2736,22 +2589,17 @@
             }
         }
 
-        // Close mobile menu when clicking on overlay
         mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
 
-        // Close mobile menu when clicking on a link
         mobileNavLinks.forEach(link => {
             link.addEventListener('click', toggleMobileMenu);
         });
 
-        // Toggle mobile menu when hamburger is clicked
         hamburgerMenu.addEventListener('click', toggleMobileMenu);
 
-        // Theme Toggle
         const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
 
-        // Check for saved theme preference or default to light
         const currentTheme = localStorage.getItem('theme') || 'light';
         if (currentTheme === 'dark') {
             body.classList.add('dark-theme');
@@ -2776,9 +2624,7 @@
         themeToggle.addEventListener('click', toggleTheme);
         mobileThemeToggle.addEventListener('click', toggleTheme);
 
-        // Set dark theme as default on initial load
         document.addEventListener('DOMContentLoaded', function () {
-            // Force dark theme on first load
             if (!localStorage.getItem('theme')) {
                 body.classList.add('dark-theme');
                 localStorage.setItem('theme', 'dark');
@@ -2787,26 +2633,19 @@
             }
         });
 
-        // Enhanced loading animation
         window.addEventListener('load', function () {
             const loader = document.querySelector('.loader');
 
-            // Add a minimum display time for better UX
             setTimeout(function () {
                 loader.classList.add('hidden');
-
-                // Initialize animations after page loads
                 initGSAPAnimations();
                 initStatsCounter();
-            }, 2000); // Show loader for 2 seconds minimum
+            }, 2000);
         });
 
-        // GSAP Animations
         function initGSAPAnimations() {
-            // Register ScrollTrigger plugin
             gsap.registerPlugin(ScrollTrigger);
 
-            // Set initial states for elements to be animated
             gsap.set('.hero-title .line, .hero-subtitle, .hero-btn', { opacity: 0, y: 50 });
             gsap.set('#about .content-text', { opacity: 0, x: -50 });
             gsap.set('#about .interactive-grid .grid-item', { opacity: 0, x: 50 });
@@ -2817,7 +2656,6 @@
             gsap.set('.contact-info', { opacity: 0, x: -100 });
             gsap.set('.contact-form', { opacity: 0, x: 100 });
 
-            // 1. Home Page Hero Animation
             gsap.timeline()
                 .to('.hero-title .line', {
                     duration: 1.2,
@@ -2839,7 +2677,6 @@
                     ease: "back.out(1.7)"
                 }, "-=0.3");
 
-            // 2. Who We Are Section
             gsap.timeline({
                 scrollTrigger: {
                     trigger: '#about',
@@ -2861,8 +2698,6 @@
                     ease: "power3.out"
                 }, "-=0.5");
 
-            // 3. Meet The Team Section
-            // First 4 cards (first row) - appear slowly one by one from bottom
             gsap.to('.team-member:nth-child(-n+4)', {
                 duration: 1.2,
                 y: 0,
@@ -2876,7 +2711,6 @@
                 }
             });
 
-            // Next 4 cards (second row) - appear when scrolled further
             gsap.to('.team-member:nth-child(n+5)', {
                 duration: 1.2,
                 y: 0,
@@ -2890,8 +2724,6 @@
                 }
             });
 
-            // 4. Featured Classes Section
-            // First 3 cards - appear slowly from bottom
             gsap.to('.class-card:nth-child(-n+3)', {
                 duration: 1.2,
                 y: 0,
@@ -2905,7 +2737,6 @@
                 }
             });
 
-            // Next 3 cards - appear when scrolled further
             gsap.to('.class-card:nth-child(n+4)', {
                 duration: 1.2,
                 y: 0,
@@ -2919,7 +2750,6 @@
                 }
             });
 
-            // 5. Stats Cards
             gsap.to('.stat-item', {
                 duration: 0.8,
                 scale: 1,
@@ -2933,15 +2763,12 @@
                 }
             });
 
-            // 6. Memberships Section - FIXED VERSION
             const membershipCards = gsap.utils.toArray('.membership-card');
 
-            // Set initial positions - middle card starts from bottom, side cards from sides
-            gsap.set(membershipCards[1], { y: 100, opacity: 0 }); // Middle card from bottom
-            gsap.set(membershipCards[0], { x: -100, opacity: 0 }); // Left card from left
-            gsap.set(membershipCards[2], { x: 100, opacity: 0 });  // Right card from right
+            gsap.set(membershipCards[1], { y: 100, opacity: 0 });
+            gsap.set(membershipCards[0], { x: -100, opacity: 0 });
+            gsap.set(membershipCards[2], { x: 100, opacity: 0 });
 
-            // First animate ONLY the middle card from bottom
             gsap.to(membershipCards[1], {
                 duration: 1.2,
                 y: 0,
@@ -2953,7 +2780,6 @@
                     toggleActions: 'play none none none'
                 },
                 onComplete: function () {
-                    // After middle card animation completes, animate the side cards
                     gsap.timeline()
                         .to(membershipCards[0], {
                             duration: 1,
@@ -2966,11 +2792,10 @@
                             x: 0,
                             opacity: 1,
                             ease: "power3.out"
-                        }, "-=0.5"); // Overlap slightly
+                        }, "-=0.5");
                 }
             });
 
-            // 7. Contact Section - FIXED VERSION
             gsap.timeline({
                 scrollTrigger: {
                     trigger: '#contact',
@@ -2989,28 +2814,26 @@
                     x: 0,
                     opacity: 1,
                     ease: "power3.out"
-                }, "-=0.8"); // Start form animation at the same time as info
+                }, "-=0.8");
         }
 
-        // Stats counting animation
         function initStatsCounter() {
             const statNumbers = document.querySelectorAll('.stat-number');
 
-            // Create a ScrollTrigger for the stats section
             gsap.to(statNumbers, {
                 scrollTrigger: {
                     trigger: '.stats',
                     start: 'top 80%',
                     onEnter: () => animateStats(),
-                    once: true // Only trigger once
+                    once: true
                 }
             });
 
             function animateStats() {
                 statNumbers.forEach(stat => {
                     const target = parseInt(stat.getAttribute('data-target'));
-                    const duration = 2000; // 2 seconds
-                    const step = target / (duration / 16); // 60fps
+                    const duration = 2000;
+                    const step = target / (duration / 16);
 
                     let current = 0;
                     const timer = setInterval(() => {
@@ -3025,7 +2848,6 @@
             }
         }
 
-        // Smooth scrolling for navigation links
         document.querySelectorAll('.nav-links a, .footer-links a, .mobile-nav-links a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -3041,7 +2863,6 @@
             });
         });
 
-        // Header scroll effect
         window.addEventListener('scroll', function () {
             const header = document.querySelector('.header');
             if (window.scrollY > 50) {
@@ -3051,7 +2872,6 @@
             }
         });
 
-        // Newsletter form submission
         document.querySelector('.newsletter-form').addEventListener('submit', function (e) {
             e.preventDefault();
             const email = this.querySelector('input').value;
@@ -3061,7 +2881,6 @@
             }
         });
 
-        // Add click handlers for buttons
         document.querySelectorAll('.class-btn, .hero-btn, .membership-card .class-btn').forEach(btn => {
             btn.addEventListener('click', function () {
                 this.style.transform = 'scale(0.95)';
@@ -3071,7 +2890,6 @@
             });
         });
 
-        // Contact section functionality
         const contactBtn = document.getElementById('contactBtn');
         const contactSection = document.getElementById('contact');
 
@@ -3092,7 +2910,6 @@
             scrollToContact();
         });
 
-        // Contact form submission
         document.getElementById('contactForm').addEventListener('submit', function (e) {
             e.preventDefault();
 
@@ -3109,13 +2926,11 @@
             }
         });
 
-        // Smooth Custom Cursor with Pointer State
         const cursor = document.getElementById('customCursor');
         let mouseX = 0, mouseY = 0;
         let cursorX = 0, cursorY = 0;
         let speed = 0.15;
 
-        // Animate cursor with smooth easing
         function animateCursor() {
             let dx = mouseX - cursorX;
             let dy = mouseY - cursorY;
@@ -3127,56 +2942,44 @@
             requestAnimationFrame(animateCursor);
         }
 
-        // Track mouse position
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
         });
 
-        // Pointer elements (links, buttons, etc.)
         const pointers = document.querySelectorAll(
             'a, button, .class-btn, .cta-btn, .hero-btn, .mobile-cta-btn, .submit-btn, .newsletter-btn, .theme-toggle, .mobile-theme-toggle, .hamburger-menu'
         );
 
-        // Hover elements (cards, interactive items)
         const hoverElements = document.querySelectorAll(
             '.class-card, .team-member, .membership-card, .interactive-grid .grid-item, .stat-item'
         );
 
-        // Pointer state (filled circle)
         pointers.forEach(el => {
             el.addEventListener('mouseenter', () => cursor.classList.add('cursor-pointer', 'cursor-hover'));
             el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-pointer', 'cursor-hover'));
         });
 
-        // Hover state (enlarged dot with ring)
         hoverElements.forEach(el => {
             el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
             el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
         });
 
-        // Click animation
         document.addEventListener('mousedown', () => cursor.classList.add('cursor-click'));
         document.addEventListener('mouseup', () => cursor.classList.remove('cursor-click'));
 
-        // Hide cursor when leaving window
         document.addEventListener('mouseout', (e) => {
             if (!e.relatedTarget) cursor.style.opacity = '0';
         });
         document.addEventListener('mouseover', () => cursor.style.opacity = '1');
 
-        // Start animation
         animateCursor();
 
-        // NEW FEATURES ADDED:
-
-        // 1. Button Navigation
         const heroBtn = document.getElementById('heroBtn');
         const bookBtns = document.querySelectorAll('.book-btn');
         const joinBtns = document.querySelectorAll('.join-btn');
         const membershipsSection = document.getElementById('memberships');
 
-        // Hero button scrolls to memberships
         heroBtn.addEventListener('click', function () {
             membershipsSection.scrollIntoView({
                 behavior: 'smooth',
@@ -3184,7 +2987,6 @@
             });
         });
 
-        // Book and Join buttons scroll to contact
         bookBtns.forEach(btn => {
             btn.addEventListener('click', function () {
                 contactSection.scrollIntoView({
@@ -3203,43 +3005,15 @@
             });
         });
 
-        // // 2. Enhanced button ripple effects
-        // const rippleButtons = document.querySelectorAll('.ripple-btn');
-
-        // rippleButtons.forEach(button => {
-        //     button.addEventListener('click', function (e) {
-        //         // Create ripple element
-        //         const ripple = document.createElement('span');
-        //         const rect = this.getBoundingClientRect();
-        //         const size = Math.max(rect.width, rect.height);
-        //         const x = e.clientX - rect.left - size / 2;
-        //         const y = e.clientY - rect.top - size / 2;
-
-        //         ripple.style.width = ripple.style.height = size + 'px';
-        //         ripple.style.left = x + 'px';
-        //         ripple.style.top = y + 'px';
-        //         ripple.classList.add('ripple-effect');
-
-        //         this.appendChild(ripple);
-
-        //         // Remove ripple after animation
-        //         setTimeout(() => {
-        //             ripple.remove();
-        //         }, 600);
-        //     });
-        // });
-        // Enhanced logo interaction
         const logo = document.querySelector('.logo');
         const footerLogo = document.querySelector('.footer-logo');
 
-        // Add click animation to logo
         function animateLogo() {
             logo.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 logo.style.transform = 'scale(1)';
             }, 150);
 
-            // Scroll to top when logo is clicked
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
@@ -3249,7 +3023,6 @@
         logo.addEventListener('click', animateLogo);
         footerLogo.addEventListener('click', animateLogo);
 
-        // Add GSAP animation for logo on page load
         gsap.to('.logo', {
             duration: 1,
             scale: 1,
@@ -3257,17 +3030,15 @@
             ease: "back.out(1.7)",
             delay: 0.5
         });
-        // 3. Ensure no horizontal scrolling
+
         window.addEventListener('resize', function () {
             if (document.documentElement.scrollWidth > window.innerWidth) {
                 document.body.style.overflowX = 'hidden';
             }
         });
 
-        // Scroll to Top Functionality
         const scrollToTopBtn = document.getElementById('scrollToTop');
 
-        // Show/hide scroll to top button
         window.addEventListener('scroll', function () {
             if (window.pageYOffset > 300) {
                 scrollToTopBtn.classList.add('visible');
@@ -3276,7 +3047,6 @@
             }
         });
 
-        // Scroll to top when clicked
         scrollToTopBtn.addEventListener('click', function () {
             window.scrollTo({
                 top: 0,
